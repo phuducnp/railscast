@@ -1,19 +1,42 @@
-<h1>Listing Articles</h1>
+<div class="mx-auto mt-5">
+  <h1>Listing Articles</h1>
 
-<%= link_to 'New Article', new_article_path %>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
-  </tr>
-  <% @articles.each do |article| %>
-    <td><%= article.title %></td>
-    <td><%= article.text %></td>
-    <td><%= link_to 'Show', article_path(article) %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Destroy', article_path(article),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-  <% end %>
-</table>
+  <div class="float-right">
+    <%= link_to('New Article', new_article_path, class: "btn btn-outline-primary mb-3 btn-lg") %>
+  </div>
+
+  <table class="table text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Text</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td><%= article.text %></td>
+        <td>
+          <%= link_to(article_path(article), class: "btn btn-outline-success") do %>
+            <i class="fa fa-eye" aria-hidden="true"></i> <%= 'Show' %>
+          <% end %>
+          <%= link_to(edit_article_path(article), class: "btn btn-outline-warning") do %>
+            <i class="fa fa-ellipsis-h" aria-hidden="true"></i> <%= 'Edit' %>
+          <% end %>
+          <%= link_to article_path(article), class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash" aria-hidden="true"></i> <%= 'Delete' %>
+          <% end %>
+        </td>
+      <% end %>
+  </tbody>
+  </table>
+
+  <div class="float-right">
+    <%= link_to(root_path, class: "btn btn-outline-secondary ml-2 btn-sm") do %>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> <%= 'Back' %>
+    <% end %>
+  </div>
+</div>

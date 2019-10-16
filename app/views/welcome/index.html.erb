@@ -1,2 +1,6 @@
-<h1>Helloo, This is my page</h1>
-<%= link_to 'My blog', controller: 'articles' %>
+<div class="mx-auto mt-5 text-center" style="width: 500px;">
+  <h1 class="cover-heading">Helloo, This is my page</h1>
+  <div>
+    <%= link_to('My blog', articles_path, class: "btn btn-primary btn-lg") %>
+  </div>
+</div>

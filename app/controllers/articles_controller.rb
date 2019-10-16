@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
+  before_action :load_user, only: [:show, :update, :destroy]
+
   def index
     @articles = Article.all
   end
 
   def show
-    @article = Article.find_by(id: params[:id])
   end
 
   def new
@@ -26,8 +27,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find_by(id: params[:id])
-
     if @article.update(article_params)
       redirect_to @article
     else
@@ -36,7 +35,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
 
     redirect_to articles_path
@@ -45,5 +43,9 @@ class ArticlesController < ApplicationController
   private
   def article_params
     params.require(:article).permit(:title, :text)
+  end
+
+  def load_user
+    @article = Article.find_by(id: params[:id])
   end
 end
